@@ -63,5 +63,20 @@ class BoletoProcessorApplicationTests {
 		assertTrue(fatura.isPago());
 	}
 
+	@Test
+	void testPagamentosNaoCriados() {
+		Fatura fatura = new Fatura("2024-02-29", 1500, "João Da Silva");
+		Boleto boleto1 = new Boleto("123", "2024-02-28", 500);
+		Boleto boleto2 = new Boleto("651", "2024-02-28", 400);
+
+		fatura.addBoleto(boleto1);
+		fatura.addBoleto(boleto2);
+
+		fatura.pagar();
+
+		assertFalse(fatura.isPago());
+		assertTrue(fatura.getPagamentos().isEmpty());
+	}
+
 
 }
