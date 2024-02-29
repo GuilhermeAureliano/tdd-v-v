@@ -10,6 +10,7 @@ public class Fatura {
     private String nomeCliente;
     private List<Boleto> boletos;
     private boolean pago;
+    private List<Pagamento> pagamentos;
 
     public Fatura(String data, double valor, String nomeCliente) {
         this.data = data;
@@ -17,10 +18,13 @@ public class Fatura {
         this.nomeCliente = nomeCliente;
         this.boletos = new ArrayList<>();
         this.pago = false;
+        this.pagamentos = new ArrayList<>();
     }
 
     public void addBoleto(Boleto boleto) {
         this.boletos.add(boleto);
+        this.pagamentos.add(
+                new Pagamento(boleto.getValorPago(), boleto.getData(), "BOLETO"));
     }
 
     public void pagar() {
@@ -35,5 +39,9 @@ public class Fatura {
 
     public boolean isPago() {
         return this.pago;
+    }
+
+    public List<Pagamento> getPagamentos() {
+        return this.pagamentos;
     }
 }
