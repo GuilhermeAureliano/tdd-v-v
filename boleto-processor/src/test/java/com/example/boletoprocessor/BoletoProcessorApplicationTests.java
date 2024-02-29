@@ -14,6 +14,7 @@ class BoletoProcessorApplicationTests {
 	void contextLoads() {
 	}
 
+	// Teste para verificar se a fatura foi paga
 	@Test
 	void testFaturaPaga() {
 		Fatura fatura = new Fatura("2024-02-29", 1500, "João Da Silva");
@@ -34,6 +35,7 @@ class BoletoProcessorApplicationTests {
 		assertEquals(600, fatura.getPagamentos().get(2).getValorPago());
 	}
 
+	// Teste para verificar se a fatura não foi paga
 	@Test
 	void testFaturaNaoPaga() {
 		Fatura fatura = new Fatura("2024-02-29", 1500, "João Da Silva");
@@ -47,5 +49,19 @@ class BoletoProcessorApplicationTests {
 
 		assertFalse(fatura.isPago());
 	}
+
+	// Teste para verificar se a fatura foi paga com um único boleto
+	@Test
+	void testFaturaPagaComUmBoleto() {
+		Fatura fatura = new Fatura("2024-02-29", 1500, "João Da Silva");
+		Boleto boleto1 = new Boleto("123", "2024-02-28", 1500);
+
+		fatura.addBoleto(boleto1);
+
+		fatura.pagar();
+
+		assertTrue(fatura.isPago());
+	}
+
 
 }
