@@ -23,8 +23,6 @@ public class Fatura {
 
     public void addBoleto(Boleto boleto) {
         this.boletos.add(boleto);
-        this.pagamentos.add(
-                new Pagamento(boleto.getValorPago(), boleto.getData(), "BOLETO"));
     }
 
     public void pagar() {
@@ -34,6 +32,10 @@ public class Fatura {
         }
         if (somaBoletos >= this.valor) {
             this.pago = true;
+            for (Boleto boleto : boletos) {
+                this.pagamentos.add(
+                        new Pagamento(boleto.getValorPago(), boleto.getData(), "BOLETO"));
+            }
         }
     }
 
