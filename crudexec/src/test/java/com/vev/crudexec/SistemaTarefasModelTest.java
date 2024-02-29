@@ -81,4 +81,18 @@ public class SistemaTarefasModelTest {
                 () -> assertEquals(tarefa3.getDataVencimento(), listaTarefas.get(2).getDataVencimento()),
                 () -> assertEquals(tarefa3.getPrioridade(), listaTarefas.get(2).getPrioridade()));
     }
+
+    @Test
+    void atualizarTarefa() {
+        TarefaModel tarefa = new TarefaModel("Tarefa 1", "Descrição 1", "2024-03-01", Prioridade.ALTA);
+        sistemaTarefas.criarTarefa(tarefa.getTitulo(), tarefa.getDescricao(), tarefa.getDataVencimento(),
+                tarefa.getPrioridade());
+
+        sistemaTarefas.atualizarTarefa(tarefa, "Tarefa Atualizada", "Nova Descrição", "2024-03-02", Prioridade.MEDIA);
+
+        assertEquals("Tarefa Atualizada", tarefa.getTitulo());
+        assertEquals("Nova Descrição", tarefa.getDescricao());
+        assertEquals("2024-03-02", tarefa.getDataVencimento());
+        assertEquals(Prioridade.MEDIA, tarefa.getPrioridade());
+    }
 }
