@@ -1,8 +1,11 @@
 package com.example.boletoprocessor;
 
+import com.example.models.Boleto;
+import com.example.models.Fatura;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -24,7 +27,7 @@ class BoletoProcessorApplicationTests {
 		fatura.addBoleto(boleto3);
 
 		fatura.pagar();
-		assertTrue(true, fatura.isPago());
+		assertEquals(true, fatura.isPago());
 	}
 
 }
