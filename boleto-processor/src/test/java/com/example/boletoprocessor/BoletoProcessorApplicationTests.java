@@ -27,7 +27,10 @@ class BoletoProcessorApplicationTests {
 		fatura.addBoleto(boleto3);
 
 		fatura.pagar();
-		assertEquals(true, fatura.isPago());
+		assertEquals(3, fatura.getPagamentos().size());
+		assertEquals(500, fatura.getPagamentos().get(0).getValorPago());
+		assertEquals(400, fatura.getPagamentos().get(1).getValorPago());
+		assertEquals(600, fatura.getPagamentos().get(2).getValorPago());
 	}
 
 }
