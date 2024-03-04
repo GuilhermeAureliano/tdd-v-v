@@ -2,15 +2,16 @@ package com.example.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Fatura {
 
-    private String data;
-    private double valor;
-    private String nomeCliente;
-    private List<Boleto> boletos;
+    private final String data;
+    private final double valor;
+    private final String nomeCliente;
+    private final List<Boleto> boletos;
     private boolean pago;
-    private List<Pagamento> pagamentos;
+    private final List<Pagamento> pagamentos;
 
     public Fatura(String data, double valor, String nomeCliente) {
         this.data = data;
@@ -22,20 +23,29 @@ public class Fatura {
     }
 
     public void addBoleto(Boleto boleto) {
-        this.boletos.add(boleto);
+        this.boletos.add(Objects.requireNonNull(boleto, "Boleto não pode ser nulo"));
     }
 
     public void pagar() {
+        double somaBoletos = calcularTotalBoletos();
+        if (somaBoletos >= this.valor) {
+            this.pago = true;
+            efetuarPagamento();
+        }
+    }
+
+    private double calcularTotalBoletos() {
         double somaBoletos = 0;
         for (Boleto boleto : boletos) {
             somaBoletos += boleto.getValorPago();
         }
-        if (somaBoletos >= this.valor) {
-            this.pago = true;
-            for (Boleto boleto : boletos) {
-                this.pagamentos.add(
-                        new Pagamento(boleto.getValorPago(), boleto.getData(), "BOLETO"));
-            }
+        return somaBoletos;
+    }
+
+    private void efetuarPagamento() {
+        for (Boleto boleto : boletos) {
+            this.pagamentos.add(
+                    new Pagamento(boleto.getValorPago(), boleto.getData(), "BOLETO"));
         }
     }
 
