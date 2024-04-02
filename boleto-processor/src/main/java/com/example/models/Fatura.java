@@ -14,6 +14,9 @@ public class Fatura {
     private final List<Pagamento> pagamentos;
 
     public Fatura(String data, double valor, String nomeCliente) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor da fatura deve ser maior que zero");
+        }
         this.data = data;
         this.valor = valor;
         this.nomeCliente = nomeCliente;
@@ -21,6 +24,7 @@ public class Fatura {
         this.pago = false;
         this.pagamentos = new ArrayList<>();
     }
+
 
     public void addBoleto(Boleto boleto) {
         this.boletos.add(Objects.requireNonNull(boleto, "Boleto não pode ser nulo"));

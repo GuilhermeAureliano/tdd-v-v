@@ -7,6 +7,9 @@ public class Boleto {
     private double valorPago;
 
     public Boleto(String codigo, String data, double valorPago) {
+        if (valorPago <= 0) {
+            throw new IllegalArgumentException("Valor do boleto deve ser maior que zero");
+        }
         this.codigo = codigo;
         this.data = data;
         this.valorPago = valorPago;
