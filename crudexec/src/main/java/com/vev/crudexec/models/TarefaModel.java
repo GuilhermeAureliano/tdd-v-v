@@ -1,7 +1,9 @@
 package com.vev.crudexec.models;
 
 public class TarefaModel implements Comparable<TarefaModel> {
-    private String titulo;
+    public static final int MAX_TITULO_LENGTH = 1000;
+    
+	private String titulo;
     private String descricao;
     private String dataVencimento;
     private Prioridade prioridade;
