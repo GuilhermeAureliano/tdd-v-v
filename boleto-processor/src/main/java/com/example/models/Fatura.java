@@ -56,4 +56,16 @@ public class Fatura {
     public List<Pagamento> getPagamentos() {
         return this.pagamentos;
     }
+
+    public List<Boleto> getBoletos() {
+        return this.boletos;
+    }
+
+    public double getValor() {
+        return this.valor;
+    }
+
+    public void setPago(boolean pago) {
+        this.pago = pago;
+    }
 }

@@ -2,6 +2,7 @@ package functionalTests;
 
 import com.example.models.Boleto;
 import com.example.models.Fatura;
+import com.example.models.ProcessadorBoletos;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
