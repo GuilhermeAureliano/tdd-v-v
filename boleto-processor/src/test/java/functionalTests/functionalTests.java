@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class functionaltests {
+public class functionalTests {
 
 
     // Testes usando a ténica de Análise de Valores Limites

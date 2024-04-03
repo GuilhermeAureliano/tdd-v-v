@@ -9,8 +9,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class junit5Tests {
     private Fatura fatura;
@@ -28,8 +26,8 @@ public class junit5Tests {
     void testFaturaNaoPaga_AVL() {
         Boleto boleto1 = new Boleto("123", "2024/03/20", 1499.00);
         processador.processa(Arrays.asList(boleto1), fatura);
-        assertFalse(fatura.isPago());
-        assertEquals(1, fatura.getPagamentos().size());
+        Assertions.assertFalse(fatura.isPago());
+        Assertions.assertEquals(1, fatura.getPagamentos().size());
     }
 
     @Test
@@ -38,15 +36,15 @@ public class junit5Tests {
     void testFaturaPaga_AVL() {
         Boleto boleto1 = new Boleto("123", "2024/03/20", 1500.00);
         processador.processa(Arrays.asList(boleto1), fatura);
-        assertTrue(fatura.isPago());
-        assertEquals(1, fatura.getPagamentos().size());
+        Assertions.assertTrue(fatura.isPago());
+        Assertions.assertEquals(1, fatura.getPagamentos().size());
     }
 
     @Test
     @Order(3)
     @DisplayName("Teste Fatura Valor Negativo - Partições de Equivalência")
     void testFaturaValorNegativo_PE() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Fatura faturaNegativa = new Fatura("2024/03/19", -100.00, "Cliente 3");
             Boleto boleto1 = new Boleto("123", "2024/03/20", 100.00);
             processador.processa(Arrays.asList(boleto1), faturaNegativa);
@@ -57,7 +55,7 @@ public class junit5Tests {
     @Order(4)
     @DisplayName("Teste Fatura Valor Zero - Partições de Equivalência")
     void testFaturaValorZero_PE() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Fatura faturaZero = new Fatura("2024/03/19", 0.00, "Cliente 4");
             Boleto boleto1 = new Boleto("123", "2024/03/20", 0.00);
             processador.processa(Arrays.asList(boleto1), faturaZero);
@@ -71,8 +69,8 @@ public class junit5Tests {
     void testFaturaPaga_TD(double valorBoleto) {
         Boleto boleto = new Boleto("123", "2024/03/20", valorBoleto);
         processador.processa(Arrays.asList(boleto), fatura);
-        assertTrue(fatura.isPago());
-        assertEquals(1, fatura.getPagamentos().size());
+        Assertions.assertTrue(fatura.isPago());
+        Assertions.assertEquals(1, fatura.getPagamentos().size());
     }
 
     @RepeatedTest(5)
@@ -81,8 +79,8 @@ public class junit5Tests {
     void testFaturaPaga_Repeated() {
         Boleto boleto = new Boleto("123", "2024/03/20", 1500.00);
         processador.processa(Arrays.asList(boleto), fatura);
-        assertTrue(fatura.isPago());
-        assertEquals(1, fatura.getPagamentos().size());
+        Assertions.assertTrue(fatura.isPago());
+        Assertions.assertEquals(1, fatura.getPagamentos().size());
     }
 
     @Test
@@ -93,8 +91,8 @@ public class junit5Tests {
         Boleto boleto2 = new Boleto("124", "2024/03/21", 500.00);
         Boleto boleto3 = new Boleto("125", "2024/03/22", 500.00);
         processador.processa(Arrays.asList(boleto1, boleto2, boleto3), fatura);
-        assertTrue(fatura.isPago());
-        assertEquals(3, fatura.getPagamentos().size());
+        Assertions.assertTrue(fatura.isPago());
+        Assertions.assertEquals(3, fatura.getPagamentos().size());
     }
 
     @Test
@@ -105,15 +103,15 @@ public class junit5Tests {
         Boleto boleto2 = new Boleto("124", "2024/03/21", 400.00);
         Boleto boleto3 = new Boleto("125", "2024/03/22", 400.00);
         processador.processa(Arrays.asList(boleto1, boleto2, boleto3), fatura);
-        assertFalse(fatura.isPago());
-        assertEquals(3, fatura.getPagamentos().size());
+        Assertions.assertFalse(fatura.isPago());
+        Assertions.assertEquals(3, fatura.getPagamentos().size());
     }
 
     @Test
     @Order(9)
     @DisplayName("Teste Boleto Valor Negativo")
     void testBoletoValorNegativo() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Boleto boletoNegativo = new Boleto("123", "2024/03/20", -100.00);
             processador.processa(Arrays.asList(boletoNegativo), fatura);
         }, "Valor do boleto deve ser maior que zero");
@@ -123,7 +121,7 @@ public class junit5Tests {
     @Order(10)
     @DisplayName("Teste Boleto Valor Zero")
     void testBoletoValorZero() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Boleto boletoZero = new Boleto("123", "2024/03/20", 0.00);
             processador.processa(Arrays.asList(boletoZero), fatura);
         }, "Valor do boleto deve ser maior que zero");
