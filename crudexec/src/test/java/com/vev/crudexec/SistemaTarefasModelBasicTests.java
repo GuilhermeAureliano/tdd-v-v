@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-public class SistemaTarefasModelUnit5Tests {
+public class SistemaTarefasModelBasicTests {
 
         private SistemaTarefasModel sistemaTarefas;
 
